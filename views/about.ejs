@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О нас</title>
+    <script src="https://kit.fontawesome.com/5833c2855b.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: auto;
+        }
+
+        .navbar-brand {
+            color: #153070;
+        }
+
+        .nav-item a {
+            color: #8A8A8A;
+        }
+
+        .nav-item a:hover {
+            color: #153070;
+            font-weight: bold;
+        }
+
+        .info-card, .contact-card {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .info-title, .contact-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #153070;
+        }
+
+        .info-text, .contact-text {
+            color: #8A8A8A;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .container {
+                width: 100%;
+                padding: 0 15px;
+            }
+            .info-card, .contact-card {
+                margin-bottom: 20px;
+            }
+            .img-fluid {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .container {
+                width: 85%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                width: 55%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <% if (locals.user == null) { %>
+            <%- include('./partials/header'); %>
+        <% } %>
+        <% if (locals.user) { %>
+            <%- include('./partials/header_auth'); %>
+        <% } %>
+    </header>
+
+    <div class="container pb-5 mt-5">
+        <h2 class="text-center mb-4">О нас</h2>
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="info-card">
+                    <h3 class="info-title">Муниципальное автономное учреждение культуры "Центральная городская библиотека А. Аалто"</h3>
+                    <p class="info-text">Сокращенное название: МАУК "Библиотека А. Аалто"</p>
+                    <p class="info-text">Указом Президента Российской Федерации от 20 февраля 1995 года № 176 здание библиотеки включено в Перечень объектов исторического и культурного наследия Федерального (общероссийского) значения.</p>
+                    <p class="info-text">Учредитель: Муниципальное образование «Город Выборг»</p>
+                    <p class="info-text">Дата создания: 7 ноября 1944 года.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="https://kappa.lol/pgyMZ" alt="Библиотека" class="img-fluid rounded">
+            </div>
+        </div>
+
+        <div class="row contact-info">
+            <div class="col-md-6">
+                <img src="https://kappa.lol/Wn3AC" alt="Директор" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+                <div class="contact-card">
+                    <h3 class="contact-title">Контактная информация</h3>
+                    <p class="contact-text"><strong>Директор:</strong> Рогозина Елена Сергеевна</p>
+                    <p class="contact-text"><strong>Телефон:</strong> 8 (81378) 2 49 37</p>
+                    <p class="contact-text"><strong>e-mail:</strong> e.rogozina@aaltolibrary.ru</p>
+                    <p class="contact-text"><strong>Адрес:</strong> 188800 Ленинградская область, г. Выборг, пр. Суворова, д. 4</p>
+                    <p class="contact-text"><strong>Телефон:</strong> 8 (81378) 2-11-53</p>
+                    <p class="contact-text"><strong>Телефон/факс:</strong> 8 (81378) 2-42-79</p>
+                    <p class="contact-text"><strong>e-mail:</strong> marketing@aaltolibrary.ru</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <%- include('./partials/footer'); %>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

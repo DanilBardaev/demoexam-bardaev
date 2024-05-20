@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль</title>
+    <script src="https://kit.fontawesome.com/5833c2855b.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .profile-container {
+            margin-top: 50px;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .profile-input {
+            margin-bottom: 20px;
+        }
+
+        .profile-submit-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .profile-submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .ticket-container {
+            margin-top: 50px;
+        }
+
+        .ticket-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .ticket-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .ticket-info {
+            color: #555;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <% if (locals.user == null) { %>
+            <%- include('./partials/header'); %>
+        <% } %>
+        <% if (locals.user) { %>
+            <%- include('./partials/header_auth'); %>
+        <% } %>
+    </header>
+<div class="container pb-5">
+    <div class="row justify-content-center profile-container">
+        <div class="col-md-4">
+            <div class="card profile-info">
+                <div class="card-body text-center">
+                    <img id="profileImg" src="<%= user.profile_img %>" onerror="this.onerror=null;this.src='https://kappa.lol/Nykez';" alt="фото" class="profile-img mb-3">
+                    <% if (user.email) { %> 
+                     
+                       
+                         
+                           <h5>Ваше имя: <br><%= user.name %></h5>
+                       
+                    <% } %>
+                    <% if (user.email == null) { %> 
+                        <h3 class="profile-name">Имя: <%= user.name %></h3>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% if (requests.length === 0) { %>
+    <div class="container">
+        <div class="row justify-content-center ticket-container">
+            <div class="col-md-6">
+                <div class="card ticket-card">
+                    <div class="card-body">
+                        <p class="ticket-info text-center" style="color:black">Вы еще не оставляли заявок!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } else { %>
+<% requests.forEach(function(request) { %>
+    <% if (request.username === user.name) { %> 
+        <div class="container">
+            <div class="row justify-content-center ticket-container">
+                <div class="col-md-6">
+                    <div class="card ticket-card">
+                        <div class="card-header ticket-header">
+                            Ваша Заявка
+                        </div>
+                        <div class="card-body">
+                            <p class="ticket-info">Имя пользователя: <%= request.username %></p>
+                            <% if (user.email) { %>
+                                <p class="ticket-info">Электронная почта пользователя: <%= user.email %></p>
+                            <% } %>
+                            <p class="ticket-info">Выбранная услуга: <%= request.content %></p>
+                            <p class="ticket-info">Выбранное время: <%= request.bookingTime %></p>
+                            <a href="/cancel_request/<%= request.id %>" class="btn btn-danger">Отменить</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+<% }) %>
+<% } %>
+
+<footer>
+    <%- include('./partials/footer'); %>
+  </footer>
+<script>
+    function triggerFileInput() {
+        document.getElementById('avatarInput').click();
+    }
+
+    function submitProfileImgForm() {
+        var input = document.getElementById('avatarInput');
+        if(input.files.length > 0) {
+            document.getElementById('profileImgForm').submit();
+        }
+    }
+</script>
+</body>
+</html>
